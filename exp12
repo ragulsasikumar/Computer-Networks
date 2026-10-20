@@ -1,0 +1,193 @@
+Experiment: End-to-End Communication at Transport Layer
+
+(a) Implement Echo Client–Server Using TCP/UDP Sockets
+
+Aim
+To implement echo client–server communication using TCP and UDP sockets in Python.
+
+Algorithm
+1. Create a server socket using TCP or UDP.
+2. Bind the server to an IP address and port number.
+3. The server waits for a message from the client.
+4. The client sends a message to the server.
+5. The server sends the same message back to the client.
+6. Display the echoed message and close the connection.
+
+Program 1: TCP Echo Server
+
+import socket
+
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.bind(("127.0.0.1", 5000))
+server.listen(1)
+
+print("TCP Echo Server is waiting...")
+conn, addr = server.accept()
+print("Connected by:", addr)
+
+while True:
+    data = conn.recv(1024)
+    if not data:
+        break
+    message = data.decode()
+    print("Client:", message)
+    conn.sendall(data)
+    if message.lower() == "bye":
+        break
+
+conn.close()
+server.close()
+
+Program 2: TCP Echo Client
+
+import socket
+
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client.connect(("127.0.0.1", 5000))
+
+while True:
+    message = input("Enter message: ")
+    client.sendall(message.encode())
+
+    reply = client.recv(1024).decode()
+    print("Echo from server:", reply)
+
+    if message.lower() == "bye":
+        break
+
+client.close()
+
+
+Program 3: UDP Echo Server
+
+import socket
+
+server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+server.bind(("127.0.0.1", 5001))
+
+print("UDP Echo Server is waiting...")
+
+while True:
+    data, addr = server.recvfrom(1024)
+    message = data.decode()
+    print("Client:", message)
+    server.sendto(data, addr)
+
+    if message.lower() == "bye":
+        break
+
+server.close()
+
+Program 4: UDP Echo Client
+
+import socket
+
+client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+while True:
+    message = input("Enter message: ")
+    client.sendto(message.encode(), ("127.0.0.1", 5001))
+
+    data, addr = client.recvfrom(1024)
+    print("Echo from server:", data.decode())
+
+    if message.lower() == "bye":
+        break
+
+client.close()
+
+Sample Output
+TCP/UDP client:
+Enter message: Hello
+Echo from server: Hello
+Enter message: Computer Networks
+Echo from server: Computer Networks
+Enter message: bye
+Echo from server: bye
+
+Procedure
+1. Save the server and client programs in separate Python files.
+2. Run the server program first.
+3. Run the corresponding client program in another terminal.
+4. Enter messages in the client and verify that the server echoes them.
+5. Repeat the process for both TCP and UDP.
+Result
+The echo client–server programs were implemented successfully using TCP and UDP sockets.
+
+
+
+(b) Implement a Chat Program Using Socket Programming
+Aim
+To implement a simple two-way chat application between a client and a server using TCP socket programming in Python.
+Algorithm
+1. Create a TCP socket on the server and bind it to a port.
+2. Listen for and accept a client connection.
+3. Create a TCP socket on the client and connect to the server.
+4. Allow the client and server to send and receive messages.
+5. Terminate the chat when either user enters bye.
+6. Close the sockets.
+Program 1: Chat Server
+
+import socket
+import threading
+
+def receive_messages(conn):
+    while True:
+        try:
+            message = conn.recv(1024).decode()
+            if not message or message.lower() == "bye":
+                print("\nClient disconnected.")
+                break
+            print("\nClient:", message)
+        except OSError:
+            break
+    conn.close()
+
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.bind(("127.0.0.1", 5002))
+server.listen(1)
+
+print("Chat server waiting for client...")
+conn, addr = server.accept()
+print("Client connected:", addr)
+
+threading.Thread(
+    target=receive_messages, args=(conn,), daemon=True
+).start()
+
+while True:
+    message = input("Server: ")
+    try:
+        conn.sendall(message.encode())
+    except OSError:
+        break
+    if message.lower() == "bye":
+        break
+
+conn.close()
+server.close()
+
+Sample Output
+Server terminal
+Chat server waiting for client...
+Client connected: ('127.0.0.1', 54321)
+Server: Hello
+Client: Hi
+Server: How are you?
+Client: I am fine
+
+Client terminal
+Connected to chat server.
+Client: Hello
+Server: Hi
+Client: How are you?
+Server: I am fine
+Procedure
+1. Save the programs as chat_server.py and chat_client.py.
+2. Open two terminals in the same folder.
+3. Run python chat_server.py in the first terminal.
+4. Run python chat_client.py in the second terminal.
+5. Exchange messages between the server and client.
+6. Enter bye to end the chat.
+Result
+The TCP echo client–server programs using TCP and UDP sockets and a two-way TCP chat application were implemented successfully.
