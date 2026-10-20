@@ -1,0 +1,197 @@
+Experiment: Routing at Network Layer Using Cisco Packet Tracer
+
+Aim
+To configure and simulate Static Routing and Routing Information Protocol (RIP) using Cisco Packet Tracer and verify communication between different networks.
+
+Requirements
+- Cisco Packet Tracer
+- 2 routers
+- 2 switches
+- 4 PCs
+- Copper straight-through Ethernet cables
+
+Part A: Static Routing Protocol Configuration
+Algorithm / Procedure
+1. Open Cisco Packet Tracer.
+2. Place two routers (R1 and R2), two switches, and four PCs.
+3. Connect two PCs to each switch and connect each switch to its respective router.
+4. Connect R1 and R2 using a serial or Ethernet link.
+5. Assign IP addresses to PCs and router interfaces.
+6. Configure the router interfaces and enable them using no shutdown.
+7. Configure static routes using the ip route command on both routers.
+8. Test connectivity using the ping command.
+9. Use Simulation mode to observe packet transmission between networks.
+Network Topology
+LAN 1
+
+192.168.1.0/24
+
+PC0, PC1
+
+Router R1
+
+192.168.1.1
+
+10.0.0.1
+
+
+Router R2
+
+10.0.0.2
+
+192.168.2.1
+
+
+
+Connect R1 and R2 directly using an Ethernet or serial link.
+LAN 2
+
+192.168.2.0/24
+
+PC2, PC3
+
+
+IP Address Configuration
+Device	Interface	IP address	Subnet mask
+R1	G0/0	192.168.1.1	255.255.255.0
+R1	G0/1	10.0.0.1	255.255.255.252
+R2	G0/0	192.168.2.1	255.255.255.0
+R2	G0/1	10.0.0.2	255.255.255.252
+PC0	NIC	192.168.1.2	255.255.255.0
+PC1	NIC	192.168.1.3	255.255.255.0
+PC2	NIC	192.168.2.2	255.255.255.0
+PC3	NIC	192.168.2.3	255.255.255.0
+Default gateways:
+- PC0 and PC1: 192.168.1.1
+- PC2 and PC3: 192.168.2.1
+Router Configuration
+Router R1
+enable
+configure terminal
+
+interface gigabitEthernet 0/0
+ip address 192.168.1.1 255.255.255.0
+no shutdown
+exit
+
+interface gigabitEthernet 0/1
+ip address 10.0.0.1 255.255.255.252
+no shutdown
+exit
+
+ip route 192.168.2.0 255.255.255.0 10.0.0.2
+
+end
+show ip route
+
+
+Router R2
+enable
+configure terminal
+
+interface gigabitEthernet 0/0
+ip address 192.168.2.1 255.255.255.0
+no shutdown
+exit
+
+interface gigabitEthernet 0/1
+ip address 10.0.0.2 255.255.255.252
+no shutdown
+exit
+
+ip route 192.168.1.0 255.255.255.0 10.0.0.1
+
+end
+show ip route
+
+
+If your router has different interface names, use the interfaces available on your selected model.
+Test and Expected Output
+From PC0, open Desktop → Command Prompt and enter:
+ping 192.168.2.2
+
+
+Sample output:
+Reply from 192.168.2.2: bytes=32
+Reply from 192.168.2.2: bytes=32
+
+Packets: Sent = 4, Received = 4, Lost = 0
+
+
+Observation: Static routes manually specify the next hop to reach a remote network. Use show ip route to verify the static routes marked with S.
+
+Part B: RIP Routing Protocol Configuration
+Aim
+To configure RIP version 2 on routers in Cisco Packet Tracer and verify automatic route learning between different networks.
+Algorithm / Procedure
+1. Create the same topology with two routers, two switches, and four PCs.
+2. Assign the IP addresses shown in Part A.
+3. Enable and configure the router interfaces.
+4. Configure RIP version 2 on both routers.
+5. Disable automatic classful summarization using no auto-summary.
+6. Advertise the directly connected networks using the network commands.
+7. Verify the routing table using show ip route.
+8. Ping a PC on the remote network.
+9. Observe packet transmission in Simulation mode.
+Router Configuration
+Router R1
+enable
+configure terminal
+
+router rip
+version 2
+no auto-summary
+network 192.168.1.0
+network 10.0.0.0
+exit
+
+end
+show ip route
+
+
+Router R2
+enable
+configure terminal
+
+router rip
+version 2
+no auto-summary
+network 192.168.2.0
+network 10.0.0.0
+exit
+
+end
+show ip route
+
+
+The interface IP addresses and PC settings must be configured as in Part A. Ensure that the router-to-router link is up before testing RIP.
+Test and Expected Output
+On R1, enter:
+show ip route
+
+
+Illustrative routing-table entry:
+R    192.168.2.0/24 [120/1] via 10.0.0.2
+
+
+On R2, the corresponding route should appear:
+R    192.168.1.0/24 [120/1] via 10.0.0.1
+
+
+Here, R indicates a route learned through RIP, 120 is the default RIP administrative distance, and 1 is the hop count in this example.
+
+Test connectivity from PC0:
+ping 192.168.2.2
+
+
+Expected result: successful replies from PC2 after routing converges and ARP resolution completes.
+Observation Table
+Feature	Static Routing	RIP
+Route configuration	Manually configured	Learned dynamically
+Route command	ip route	router rip
+Route identification	S	R
+Updates when topology changes	Manual updates usually required	Routes can update automatically
+Best suited for	Small, stable networks	Small networks requiring dynamic routing
+
+Result
+Static routing was configured successfully using manually defined routes. RIP version 2 was configured to exchange routing information dynamically. Connectivity between the two networks was tested using ping, and the routing tables were examined to verify the routes.
