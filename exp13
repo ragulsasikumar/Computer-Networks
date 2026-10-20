@@ -1,0 +1,55 @@
+Experiment: Implement Your Own Ping Program
+
+Aim
+To implement a ping program using Python to check whether a destination host is reachable over a network and measure the response time.
+
+Algorithm
+1. Import the required modules.
+2. Get the destination IP address or hostname from the user.
+3. Send ICMP Echo Request packets to the destination.
+4. Wait for ICMP Echo Reply packets.
+5. Calculate and display the round-trip time (RTT).
+6. Display a timeout message if no reply is received.
+
+Program (Python)
+Install the required library first:
+pip install scapy
+
+from scapy.all import IP, ICMP, sr1
+import time
+import socket
+
+host = input("Enter destination host: ")
+
+try:
+    destination = socket.gethostbyname(host)
+    print(f"Pinging {host} [{destination}]")
+
+    for i in range(4):
+        packet = IP(dst=destination) / ICMP()
+        start = time.time()
+
+        reply = sr1(packet, timeout=2, verbose=0)
+
+        if reply and reply.haslayer(ICMP) and reply[ICMP].type == 0:
+            rtt = (time.time() - start) * 1000
+            print(f"Reply from {destination}: time={rtt:.2f} ms")
+        else:
+            print("Request timed out.")
+
+except socket.gaierror:
+    print("Unable to resolve hostname.")
+except PermissionError:
+    print("Run the program with administrator/root privileges.")
+
+
+Sample Output
+Enter destination host: 8.8.8.8
+Pinging 8.8.8.8 [8.8.8.8]
+Reply from 8.8.8.8: time=25.32 ms
+Reply from 8.8.8.8: time=24.87 ms
+Reply from 8.8.8.8: time=26.14 ms
+Reply from 8.8.8.8: time=25.01 ms
+
+Result
+The ping program was implemented successfully using Python and ICMP packets to test host reachability and measure round-trip time.
