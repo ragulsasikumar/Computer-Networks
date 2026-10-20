@@ -1,0 +1,162 @@
+Experiment: Study of Network Cables
+
+Aim
+1. To study the different types of network cables used in computer networks.
+2. To prepare straight-through and crossover network cables using an RJ-45 connector and a crimping tool.
+
+Types of Network Cables
+1. Straight-through cable: Both ends follow the same wiring standard (T568A–T568A or T568B–T568B). It is commonly used to connect a computer to a switch.
+2. Crossover cable: One end follows T568A and the other follows T568B. It is used to connect similar Ethernet devices directly, especially in older networks.
+3. Coaxial cable: Used in cable television and certain networking applications.
+4. Fiber-optic cable: Transmits data using light and supports high speed over long distances.
+
+Required Materials
+- UTP Ethernet cable (Cat5e/Cat6)
+- Two RJ-45 connectors for each cable
+- Crimping tool
+- Wire stripper or cable cutter
+- LAN cable tester
+
+Wiring Standards
+T568A standard
+Pin order 1 to 8
+1
+
+White/Green
+
+
+2
+
+Green
+
+
+3
+
+White/Orange
+
+
+4
+
+Blue
+
+
+5
+
+White/Blue
+
+
+6
+
+Orange
+
+
+7
+
+White/Brown
+
+
+8
+
+Brown
+
+
+
+
+T568B standard
+Pin order 1 to 8
+1
+
+White/Orange
+
+
+2
+
+Orange
+
+
+3
+
+White/Green
+
+
+4
+
+Blue
+
+
+5
+
+White/Blue
+
+
+6
+
+Green
+
+
+7
+
+White/Brown
+
+
+8
+
+Brown
+
+Algorithm / Procedure
+A. Straight-through Cable
+1. Cut the UTP cable to the required length using a cable cutter.
+2. Remove approximately 2–3 cm of the outer insulation.
+3. Arrange the eight wires in the T568B color sequence.
+4. Straighten the wires and trim them evenly.
+5. Insert the wires into the RJ-45 connector, ensuring each wire reaches its correct pin.
+6. Use the crimping tool to fix the connector firmly.
+7. Repeat the same T568B wiring sequence at the other end.
+8. Test the cable using a LAN cable tester.
+B. Crossover Cable
+1. Cut the UTP cable to the required length.
+2. Strip the outer insulation at both ends.
+3. Arrange the wires at the first end according to T568A.
+4. Insert the wires into an RJ-45 connector and crimp it.
+5. Arrange the wires at the second end according to T568B.
+6. Insert the wires into the second RJ-45 connector and crimp it.
+7. Test the cable using a LAN cable tester.
+8. Verify that the cable follows the crossover wiring arrangement.
+Expected Output
+Straight-through cable: Both ends have the same wiring sequence.
+T568B
+
+End 1
+
+T568B
+
+End 2
+
+
+Same wiring standard at both ends
+
+Crossover cable: One end has T568A wiring and the other has T568B wiring.
+T568A
+
+End 1
+
+T568B
+
+End 2
+
+
+Different wiring standards at the two ends
+
+Sample Tester Output
+Straight-through cable:
+Pins 1–8: PASS
+
+Crossover cable:
+Pins 1 and 3: Crossed
+Pins 2 and 6: Crossed
+Other pins: Connected correctly
+
+Result: Cable wiring verified
+
+Result
+The different types of network cables were studied. Straight-through and crossover Ethernet cables were prepared using an RJ-45 connector and crimping tool, and their wiring connections were verified using a LAN cable tester.
