@@ -1,0 +1,102 @@
+Experiment: Internetworking with Routers in Cisco Packet Tracer
+
+Aim
+To design and configure an internetwork using routers in Cisco Packet Tracer, assign static IP addresses, simulate packet transmission between different networks, configure a wireless router with a DHCP server and Internet cloud, and establish an internetwork using switches, routers, and Ethernet cables.
+
+Requirements
+- Cisco Packet Tracer
+- Routers and switches
+- PCs and laptops
+- Wireless router
+- Internet cloud
+- Copper straight-through Ethernet cables
+
+Part A: Internetwork Using a Router
+Algorithm / Procedure
+1. Open Cisco Packet Tracer.
+2. Place one router, two switches, and 4 PCs in the workspace.
+3. Connect two PCs to each switch.
+4. Connect both switches to different router interfaces using Ethernet cables.
+5. Assign static IP addresses to all PCs and router interfaces.
+6. Configure the router interfaces and enable them using no shutdown.
+7. Test connectivity using the ping command.
+8. Enter Simulation mode and send a Simple PDU between PCs on different networks.
+9. Observe how the router forwards packets between the networks.
+Network Topology
+Router R1
+
+Switch 1
+
+PC0
+
+PC1
+
+
+Network 1
+
+Switch 2
+
+PC2
+
+PC3
+
+
+Network 2
+
+IP Address Configuration
+Device	IP address	Subnet mask	Default gateway
+R1 G0/0	192.168.1.1	255.255.255.0	—
+PC0	192.168.1.2	255.255.255.0	192.168.1.1
+PC1	192.168.1.3	255.255.255.0	192.168.1.1
+R1 G0/1	192.168.2.1	255.255.255.0	—
+PC2	192.168.2.2	255.255.255.0	192.168.2.1
+PC3	192.168.2.3	255.255.255.0	192.168.2.1
+
+
+Part B: Internetwork Using a Wireless Router, DHCP Server, and Internet Cloud
+Algorithm / Procedure
+1. Place an Internet cloud, wireless router, two laptops, and a server or PC in the workspace.
+2. Connect the Internet cloud or ISP-facing device to the wireless router's Internet/WAN port, where supported.
+3. Open the wireless router configuration.
+4. Configure the wireless SSID and security settings.
+5. Enable the DHCP server and specify an appropriate address range.
+6. Connect the laptops to the wireless network using the configured SSID and password.
+7. Configure the server or PC as required.
+8. Verify that wireless clients receive IP addresses automatically.
+9. Test connectivity to the local server or gateway using ping.
+10. If an ISP-side network is configured, test connectivity to a reachable device on that network.
+Expected Topology
+Internet Cloud
+
+Wireless Router
+
+DHCP enabled
+
+Laptop 1
+
+DHCP client
+
+
+Laptop 2
+
+
+
+Part C: Internetwork Using Switches, Router, and Ethernet Cables
+Algorithm / Procedure
+1. Place two switches, one router, and four PCs in Cisco Packet Tracer.
+2. Connect two PCs to each switch.
+3. Connect each switch to a different router interface using Ethernet cables.
+4. Assign static IP addresses to the PCs and router interfaces.
+5. Configure the router interfaces using the CLI and enable them.
+6. Verify the interface status using show ip interface brief.
+7. Send ping requests between PCs connected to different switches.
+8. Observe packet forwarding in Simulation mode.
+
+Observation
+- Switches forward frames within their local LANs.
+- Routers connect different IP networks.
+- Ethernet cables provide wired connectivity between PCs, switches, and router interfaces.
+- Simulation mode shows the path followed by packets across the internetwork.
+
+Result
+An internetwork was designed and configured in Cisco Packet Tracer using routers, switches, and Ethernet cables. Static IP addressing and router interface configuration were performed, packet transmission between different networks was simulated, and a wireless router with DHCP was configured to demonstrate automatic IP address allocation.
