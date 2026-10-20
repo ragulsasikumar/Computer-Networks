@@ -1,0 +1,55 @@
+Experiment: Analyse Various Types of Servers Using Webalizer Tool
+
+Aim
+To analyse web server log files using the Webalizer tool and study website traffic, visitor statistics, requests, and data transfer.
+
+Algorithm / Procedure
+1. Install the Apache web server and Webalizer tool.
+2. Generate or collect web server access log files.
+3. Configure Webalizer to read the server log file.
+4. Run Webalizer to analyse the log data.
+5. Generate HTML reports containing traffic statistics.
+6. Open the generated report in a web browser.
+7. Analyse requests, visitors, URLs, and bandwidth usage.
+
+Commands (Ubuntu/Linux)
+1. Install Webalizer
+sudo apt update
+sudo apt install apache2 webalizer
+
+2. Generate server traffic
+
+Open a browser and visit http://localhost several times.
+
+3. Analyse the Apache access log
+sudo webalizer /var/log/apache2/access.log
+
+sudo webalizer /var/log/apache2/access.log
+
+
+4. View the generated report
+
+Webalizer normally generates index.html and related report files in its configured output directory. Check the configuration:
+cat /etc/webalizer/webalizer.conf
+
+Types of Servers Analysed
+Server type	Purpose	Example analysis
+Web server	Hosts websites	Page requests, visitors, bandwidth
+FTP server	Transfers files	Downloads and file requests, if logged
+Proxy server	Forwards client requests	Requests and traffic, if compatible logs are available
+Mail server	Sends and receives email	Mail activity, if compatible logs are available
+Application server	Runs application logic	HTTP requests and responses, if logged
+Note: Webalizer primarily analyses web server access logs. Other server types can be analysed only when their logs are available in a compatible format or converted appropriately.
+Sample Output
+A Webalizer report may contain statistics such as:
+Summary for: localhost
+
+Total Hits:          1,250
+Total Files:           980
+Total Pages:           650
+Total Visits:           120
+Total Sites:             45
+Total KBytes:         8,500
+
+Result
+The Webalizer tool was used to analyse web server log data and generate reports on traffic, visits, requests, and bandwidth usage. The analysis helps evaluate website usage and server activity.
