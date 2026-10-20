@@ -1,0 +1,66 @@
+Experiment: Study of Network Commands in Linux and Windows
+
+Aim
+To study and practice various network commands used in Linux and Windows operating systems to configure, monitor, and troubleshoot network connectivity.
+
+Algorithm
+1. Start the computer and open the Command Prompt in Windows or Terminal in Linux.
+2. Execute the ipconfig command in Windows or ifconfig / ip addr in Linux to display IP address information.
+3. Use the ping command to check connectivity between computers.
+4. Execute ipconfig /all in Windows or ip route in Linux to view network configuration and routing information.
+5. Use tracert in Windows or traceroute in Linux to trace the path to a destination.
+6. Execute netstat to display active network connections and listening ports.
+7. Use nslookup to find the IP address associated with a domain name.
+8. Observe and record the output of each command.
+9. Stop the execution.
+
+Commands and Sample Output
+1. Windows Commands
+Command	Purpose	Sample output
+ipconfig	Displays IP configuration	IPv4 Address: 192.168.1.10
+ipconfig /all	Displays detailed network settings	Physical Address, DNS Server, DHCP
+ping google.com	Checks connectivity	Reply from destination
+tracert google.com	Traces the route	List of intermediate hops
+netstat -an	Displays connections and ports	TCP connection details
+nslookup google.com	Resolves a domain name	DNS server and IP address
+arp -a	Displays ARP cache	IP and physical address mappings
+
+2. Linux Commands
+Command	Purpose	Sample output
+ip addr	Displays IP addresses	inet 192.168.1.10/24
+ip route	Displays routing table	default via 192.168.1.1
+ping -c 4 google.com	Sends four ping requests	4 packets transmitted
+traceroute google.com	Traces the network route	Hop-by-hop details
+ss -tuln	Displays listening ports	TCP/UDP port information
+nslookup google.com	Resolves a domain name	DNS response
+ip neigh	Displays neighbor cache	IP and MAC address mappings
+Sample Execution Output
+Command 1: ping google.com
+Pinging google.com with 32 bytes of data:
+Reply from 142.250.xxx.xxx: bytes=32 time=25ms TTL=117
+Reply from 142.250.xxx.xxx: bytes=32 time=24ms TTL=117
+
+Packets: Sent = 4, Received = 4, Lost = 0 (0% loss)
+
+
+Command 2: ipconfig
+Ethernet adapter:
+
+IPv4 Address . . . . . : 192.168.1.10
+Subnet Mask  . . . . . : 255.255.255.0
+Default Gateway . . . : 192.168.1.1
+
+
+Command 3: Linux ip addr
+2: eth0:
+    inet 192.168.1.10/24
+    state UP
+
+
+Command 4: nslookup google.com
+Server: 192.168.1.1
+Name: google.com
+Address: 142.250.xxx.xxx
+
+Result
+Various network commands in Windows and Linux were studied and practiced. Their outputs were observed to understand IP configuration, connectivity testing, DNS resolution, routing, active connections, and network troubleshooting.
