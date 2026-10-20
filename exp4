@@ -1,0 +1,71 @@
+Experiment: Setup and Configuration of LAN Using a Switch
+
+Aim
+To set up and configure a Local Area Network (LAN) using a switch and Ethernet cables, assign IP addresses to host machines, test connectivity using the ping command, and share files and folders between computers.
+
+Requirements
+- 3–4 computers or host machines
+- One Ethernet switch
+- Ethernet (UTP) cables
+- Windows operating system
+
+Algorithm / Procedure
+1. Connect the Computers
+1. Connect 3–4 computers to the switch using Ethernet cables.
+2. Ensure that the link lights on the switch and network interfaces are active.
+3. Verify that all computers are connected to the same switch.
+2. Assign IP Addresses
+1. Open Control Panel → Network and Sharing Center → Change adapter settings.
+2. Right-click Ethernet and select Properties.
+3. Select Internet Protocol Version 4 (TCP/IPv4) and click Properties.
+4. Select Use the following IP address and configure each computer as shown below.
+Computer	IP address	Subnet mask
+PC1	192.168.1.1	255.255.255.0
+PC2	192.168.1.2	255.255.255.0
+PC3	192.168.1.3	255.255.255.0
+PC4	192.168.1.4	255.255.255.0
+Leave the default gateway blank if the LAN is isolated and does not require internet access.
+3. Check Connectivity Using Ping
+1. Open Command Prompt on PC1.
+2. Enter the following command:
+ping 192.168.1.2
+
+
+3. Repeat the test for the other computers:
+ping 192.168.1.3
+ping 192.168.1.4
+
+
+4. Verify that replies are received without packet loss.
+
+Sample output:
+C:\> ping 192.168.1.2
+
+Reply from 192.168.1.2: bytes=32 time<1ms TTL=128
+Reply from 192.168.1.2: bytes=32 time<1ms TTL=128
+Reply from 192.168.1.2: bytes=32 time<1ms TTL=128
+Reply from 192.168.1.2: bytes=32 time<1ms TTL=128
+
+Packets: Sent = 4, Received = 4, Lost = 0 (0% loss)
+
+
+Note: This is an illustrative output. If ping fails, check the IP addresses, cable connections, and firewall settings.
+4. Share and Access Files and Folders
+1. Create a folder named LANShare on PC1.
+2. Right-click the folder and select Properties → Sharing → Advanced Sharing.
+3. Enable Share this folder and assign suitable permissions to the intended users.
+4. Ensure that Network Discovery and File and Printer Sharing are enabled for the appropriate private network profile.
+5. On PC2, open File Explorer and enter the following path in the address bar:
+\\192.168.1.1\LANShare
+
+
+6. If prompted, enter the credentials of an authorized account on PC1.
+7. Create or copy a test file into the shared folder and verify that it can be accessed from PC2.
+
+Expected output:
+Folder shared successfully.
+PC2 accessed \\192.168.1.1\LANShare
+File transferred successfully.
+
+Result
+A LAN was configured using a switch and Ethernet cables. IP addresses were assigned to the host computers, connectivity was verified using the ping command, and file and folder sharing between computers was demonstrated.
