@@ -1,0 +1,57 @@
+Experiment: Packet Capture Using Wireshark
+
+Aim
+To study the features of Wireshark as a packet capture and network analysis tool and to understand the encapsulation of information at various layers of the protocol stack.
+
+Requirements
+- Computer with Windows or Linux
+- Wireshark software
+- Active network connection
+
+Algorithm / Procedure
+1. Download and install Wireshark from the official website: https://www.wireshark.org/
+2. Open Wireshark and select the active network interface, such as Wi-Fi or Ethernet.
+3. Click Start Capturing Packets to capture network traffic.
+4. Generate network traffic by opening a website or executing the ping command.
+5. Observe the captured packets displayed in the packet list.
+6. Apply display filters such as icmp, dns, tcp, and http to analyze specific protocols.
+7. Select any packet to view its details in the packet details pane.
+8. Expand the protocol layers to observe encapsulation at the Ethernet, IP, TCP/UDP, and application layers.
+9. Stop the capture and save the captured file for further analysis.
+
+Important Features of Wireshark
+- Captures packets from network interfaces.
+- Displays source and destination IP addresses.
+- Identifies network protocols and packet lengths.
+- Supports display filters for specific protocols.
+- Provides detailed packet header information.
+- Allows captured packets to be saved and analyzed later.
+
+Commands and Display Filters
+Filter / Command	Purpose
+icmp	Displays ICMP packets, including ping traffic
+dns	Displays DNS queries and responses
+tcp	Displays TCP packets
+udp	Displays UDP packets
+ip.addr == 192.168.1.1	Displays packets involving a specified IP address
+ping 8.8.8.8	Generates ICMP traffic on systems and networks that permit it
+
+Sample Observation and Output
+After capturing packets in Wireshark, the packet list may display the following:
+No.	Protocol	Source	Destination	Information
+1	DNS	192.168.1.10	192.168.1.1	DNS query
+2	DNS	192.168.1.1	192.168.1.10	DNS response
+3	TCP	192.168.1.10	Remote server	TCP segment
+4	ICMP	192.168.1.10	8.8.8.8	Echo request
+5	ICMP	8.8.8.8	192.168.1.10	Echo reply
+
+Packet Details Observed
+When a packet is selected, Wireshark may show:
+1. Frame: Captured frame length and interface information.
+2. Ethernet II: Source and destination MAC addresses.
+3. Internet Protocol (IP): Source and destination IP addresses.
+4. TCP/UDP: Source and destination port numbers.
+5. Application protocol: Application-specific data, such as DNS queries or responses.
+
+Result
+Wireshark was studied as a packet capture and network analysis tool. Network packets were captured and analyzed using display filters, and encapsulation at the application, transport, network, data link, and physical layers of the protocol stack was understood.
