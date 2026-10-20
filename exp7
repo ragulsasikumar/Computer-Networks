@@ -1,0 +1,78 @@
+Experiment: Flow Control at Data Link Layer Using Sliding Window Protocol
+
+Aim
+To write a program to implement flow control at the Data Link Layer using the Sliding Window Protocol and simulate the transmission of frames from one node to another.
+
+Algorithm
+1. Start the program.
+2. Read the total number of frames and the sender's window size.
+3. Initialize the sender's window with the specified number of frames.
+4. Transmit the frames within the current window from the sender to the receiver.
+5. The receiver accepts the frames and sends acknowledgements (ACKs).
+6. After receiving acknowledgements, slide the window forward.
+7. Continue transmitting frames until all frames are acknowledged.
+8. Display the transmitted frames and acknowledgements.
+9. Stop the program.
+
+Program (Python)
+# Sliding Window Protocol
+
+total_frames = int(input("Enter total number of frames: "))
+window_size = int(input("Enter window size: "))
+
+if total_frames <= 0 or window_size <= 0:
+    print("Enter positive values.")
+else:
+    sent = 0
+
+    print("\n--- Sliding Window Simulation ---")
+
+    while sent < total_frames:
+        start = sent
+        end = min(sent + window_size, total_frames)
+
+        print("\nSender sends frames:")
+        for frame in range(start + 1, end + 1):
+            print("Frame", frame, "transmitted")
+
+        print("\nReceiver acknowledges frames:")
+        for frame in range(start + 1, end + 1):
+            print("ACK received for Frame", frame)
+
+        sent = end
+        print("Window slides forward.\n")
+
+    print("All frames transmitted successfully.")
+
+
+Sample Output
+Enter total number of frames: 5
+Enter window size: 3
+
+--- Sliding Window Simulation ---
+
+Sender sends frames:
+Frame 1 transmitted
+Frame 2 transmitted
+Frame 3 transmitted
+
+Receiver acknowledges frames:
+ACK received for Frame 1
+ACK received for Frame 2
+ACK received for Frame 3
+Window slides forward.
+
+Sender sends frames:
+Frame 4 transmitted
+Frame 5 transmitted
+
+Receiver acknowledges frames:
+ACK received for Frame 4
+ACK received for Frame 5
+Window slides forward.
+
+All frames transmitted successfully.
+
+
+Result
+The Sliding Window Protocol was implemented successfully. Frames were transmitted from the sender to the receiver in groups according to the window size, acknowledgements were received, and the sending window advanced until all frames were transmitted.
