@@ -1,0 +1,41 @@
+Experiment: Discover Live Hosts Using Nmap Scans on TryHackMe
+
+Aim
+To discover live hosts on a network using Nmap by performing ARP, ICMP, TCP, and UDP host discovery scans on an authorized TryHackMe lab network.
+
+Requirements
+- TryHackMe account
+- Nmap tool
+- Linux terminal or TryHackMe AttackBox
+- Authorized target IP address or network range
+
+Algorithm
+1. Start the TryHackMe lab and launch the AttackBox or connect to the lab VPN.
+2. Identify the target IP address or authorized network range.
+3. Open the terminal and verify the Nmap installation using nmap --version.
+4. Perform ARP-based host discovery on the local Ethernet network.
+5. Perform ICMP-based discovery to identify hosts that respond to ping requests.
+6. Perform TCP-based discovery using selected TCP ports.
+7. Perform UDP-based discovery using selected UDP ports.
+8. Observe the scan results and identify live hosts.
+9. Compare the results of the different discovery techniques.
+10. Stop the lab after completing the experiment.
+
+Commands and Sample Output
+1. Check Nmap Installation
+nmap --version
+
+Sample output:
+Nmap version 7.x
+Platform: x86_64-pc-linux-gnu
+
+Observation Table
+Scan type	Nmap option	Purpose
+ARP	-PR	Discovers hosts on the local Ethernet network
+ICMP	-PE	Discovers hosts using ICMP Echo Requests
+TCP	-PS	Discovers hosts using TCP SYN probes
+UDP	-PU	Discovers hosts using UDP probes
+
+
+Result
+Nmap host discovery techniques using ARP, ICMP, TCP, and UDP were studied. The scans demonstrate how different probe types can identify live hosts on an authorized network, including cases where some discovery methods are blocked.
