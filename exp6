@@ -1,0 +1,129 @@
+Experiment: Error Detection and Correction Using Hamming Code
+
+Aim
+To write a program to implement error detection and correction using the Hamming code concept and verify its error-correction capability by introducing an error into the transmitted data.
+
+Algorithm
+1. Start the program.
+2. Read the binary data stream from the user.
+3. Calculate the number of parity bits required using \(2^r \geq m+r+1\), where \(m\) is the number of data bits and \(r\) is the number of parity bits.
+4. Place parity bits at positions 1, 2, 4, 8, etc.
+5. Calculate the parity bits using even parity.
+6. Display the generated Hamming code.
+7. Introduce a single-bit error at a position specified by the user.
+8. Recalculate the parity bits at the receiver and determine the syndrome.
+9. Correct the bit at the error position indicated by the syndrome.
+10. Display the corrected code and verify the original data.
+11. Stop.
+
+Program (Python)
+def hamming_encode(data):
+    m = len(data)
+    r = 0
+
+    while 2 ** r < m + r + 1:
+        r += 1
+
+    n = m + r
+    code = ['0'] * (n + 1)
+
+    j = 0
+    for i in range(1, n + 1):
+        if i & (i - 1):  # Not a power of 2
+            code[i] = data[j]
+            j += 1
+
+    # Calculate even parity bits
+    for i in range(r):
+        p = 2 ** i
+        parity = 0
+
+        for j in range(1, n + 1):
+            if j & p:
+                parity ^= int(code[j])
+
+        code[p] = str(parity)
+
+    return ''.join(code[1:])
+
+
+def hamming_correct(received):
+    code = ['0'] + list(received)
+    n = len(received)
+    syndrome = 0
+    p = 1
+
+    while p <= n:
+        parity = 0
+
+        for i in range(1, n + 1):
+            if i & p:
+                parity ^= int(code[i])
+
+        if parity:
+            syndrome += p
+
+        p *= 2
+
+    print("Syndrome:", syndrome)
+
+    if syndrome != 0 and syndrome <= n:
+        code[syndrome] = (
+            '1' if code[syndrome] == '0' else '0'
+        )
+        print("Error at position:", syndrome)
+    elif syndrome > n:
+        print("Error position is outside the codeword.")
+
+    return ''.join(code[1:])
+
+
+data = input("Enter binary data: ")
+
+if not data or any(bit not in "01" for bit in data):
+    print("Enter a valid binary data stream.")
+else:
+    encoded = hamming_encode(data)
+    print("Transmitted Hamming code:", encoded)
+
+    received = list(encoded)
+    pos = int(input(
+        f"Enter error position (1 to {len(encoded)}, 0 for none): "
+    ))
+
+    if pos < 0 or pos > len(encoded):
+        print("Invalid error position.")
+    else:
+        if pos != 0:
+            index = pos - 1
+            received[index] = (
+                '1' if received[index] == '0' else '0'
+            )
+
+        received = ''.join(received)
+        print("Received code:", received)
+
+        corrected = hamming_correct(received)
+        print("Corrected code:", corrected)
+
+        # Extract data bits from corrected code
+        original_data = ''.join(
+            corrected[i - 1]
+            for i in range(1, len(corrected) + 1)
+            if i & (i - 1)
+        )
+        print("Recovered data:", original_data)
+
+Test Run / Sample Output
+Enter binary data: 1011
+Transmitted Hamming code: 0110011
+Enter error position (1 to 7, 0 for none): 5
+
+Received code: 0110111
+Syndrome: 5
+Error at position: 5
+Corrected code: 0110011
+Recovered data: 1011
+
+Result
+The Hamming code program was implemented and tested successfully. A single-bit transmission error was detected and corrected, and the original data stream was recovered.
