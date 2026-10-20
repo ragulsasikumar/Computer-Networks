@@ -1,0 +1,72 @@
+Experiment: Packet Sniffing Using RAW Sockets
+
+Aim
+To write a Python program using RAW sockets to capture and display network packets.
+
+Algorithm
+1. Import the socket module.
+2. Create a RAW socket to receive IP packets.
+3. Bind the socket to the network interface or host.
+4. Receive packets continuously.
+5. Extract and display the source IP, destination IP, and protocol.
+6. Stop the program using Ctrl + C.
+
+Program (Python)
+
+import socket
+import struct
+
+# Create a RAW socket to capture IP packets
+sniffer = socket.socket(
+    socket.AF_INET,
+    socket.SOCK_RAW,
+    socket.IPPROTO_IP
+)
+
+host = socket.gethostbyname(socket.gethostname())
+sniffer.bind((host, 0))
+
+# Include the IP header in received packets
+sniffer.setsockopt(
+    socket.IPPROTO_IP,
+    socket.IP_HDRINCL,
+    1
+)
+
+print("Packet Sniffer Started...")
+print("Source IP\t\tDestination IP\t\tProtocol")
+
+try:
+    while True:
+        packet, addr = sniffer.recvfrom(65535)
+
+        # Parse the IPv4 header
+        ip_header = packet[:20]
+        iph = struct.unpack("!BBHHHBBH4s4s", ip_header)
+
+        protocol = iph[6]
+        source_ip = socket.inet_ntoa(iph[8])
+        dest_ip = socket.inet_ntoa(iph[9])
+
+        print(
+            f"{source_ip}\t{dest_ip}\t{protocol}"
+        )
+
+except KeyboardInterrupt:
+    print("\nPacket sniffing stopped.")
+
+finally:
+    sniffer.close()
+
+
+Sample Output
+Packet Sniffer Started...
+Source IP          Destination IP       Protocol
+192.168.1.5        142.250.183.14       6
+192.168.1.5        8.8.8.8              17
+142.250.183.14     192.168.1.5          6
+
+Packet sniffing stopped.
+
+Result
+The packet-sniffing program was implemented using RAW sockets to capture packets and display their source IP address, destination IP address, and protocol number.
